@@ -9,13 +9,12 @@ sidebar:
     avatar: profile.png  #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
 
     # Sidebar links
-    email: deiver.01@hotmail.com
+    email: contact@deiver.com
     phone: (506) 8326-1813
     timezone: America/Costa_Rica
     citizenship: Costa Rica
     website:
-    linkedin: deiver-romero
-    github:
+    github: deiver-romero
     telegram:
     gitlab:
     bitbucket:
