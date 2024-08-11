@@ -42,10 +42,20 @@
         }
         #menu {
             display: none;
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #menu.show {
+            opacity: 1;
+            transform: translateY(0);
+            display: flex;
         }
         @media (min-width: 768px) {
             #menu {
                 display: flex !important;
+                opacity: 1;
+                transform: translateY(0);
             }
         }
         @media (max-width: 767px) {
@@ -56,7 +66,6 @@
                 right: 0;
                 bottom: 0;
                 background-color: rgba(31, 41, 55, 0.98);
-                display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
@@ -69,46 +78,43 @@
             #menu li {
                 margin: 1.5rem 0;
             }
-#closeMenu {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 2rem;
-    color: white;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-
+            #closeMenu {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                font-size: 2rem;
+                color: white;
+                cursor: pointer;
+                padding: 0.5rem;
+            }
+            #menu ul li a {
+                font-size: 1.5rem;
+                padding: 0.5rem 0;
+            }
+            #menuToggle {
+                font-size: 1.5rem;
+                color: white;
+                transition: transform 0.3s ease;
+            }
+            #menuToggle:hover {
+                transform: scale(1.1);
+            }
         }
-        @media (max-width: 767px) {
-    #menu ul li a {
-        font-size: 1.5rem;
-        padding: 0.5rem 0;
-    }
-    #menuToggle {
-    font-size: 1.5rem;
-    color: white;
-    transition: transform 0.3s ease;
-}
-
-#menuToggle:hover {
-    transform: scale(1.1);
-}
-
-}
-
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-300">
     <header class="gradient-bg text-white p-4 sticky top-0 z-10">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-bold">Deiver Romero</h1>
-<button id="menuToggle" class="md:hidden p-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-</button>
-            <nav id="menu" class="!hidden md:flex md:flex-row md:space-x-6">
+            <button id="menuToggle" class="md:hidden p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <nav id="menu" class="md:flex md:flex-row md:space-x-6">
                 <button id="closeMenu" class="md:hidden">&times;</button>
                 <ul class="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-6">
                     <li><a href="#about" class="hover:text-indigo-300 transition duration-300">About</a></li>
@@ -302,53 +308,52 @@
     </div>
 </footer>
 
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('menu');
+    const closeMenu = document.getElementById('closeMenu');
 
-    <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const menu = document.getElementById('menu');
-        const closeMenu = document.getElementById('closeMenu');
-    
-        function hideMenu() {
-            menu.classList.add('!hidden');
-            document.body.classList.remove('overflow-hidden');
-        }
-    
-        function showMenu() {
-            menu.classList.remove('!hidden');
-            document.body.classList.add('overflow-hidden');
-        }
-    
-        menuToggle.addEventListener('click', showMenu);
-        closeMenu.addEventListener('click', hideMenu);
-    
-        // Close menu when clicking a link (for mobile)
-        const menuLinks = menu.querySelectorAll('a');
-        menuLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                if (window.innerWidth < 768) {
-                    e.preventDefault();
-                    hideMenu();
-                    setTimeout(() => {
-                        window.location.href = link.href;
-                    }, 300); // Delay to allow the menu to close smoothly
-                }
-            });
-        });
-    
-        // Ensure correct display when resizing window
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 768) {
-                menu.classList.remove('hidden');
-                document.body.classList.remove('overflow-hidden');
-            } else {
+    function hideMenu() {
+        menu.classList.remove('show');
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    function showMenu() {
+        menu.classList.add('show');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    menuToggle.addEventListener('click', showMenu);
+    closeMenu.addEventListener('click', hideMenu);
+
+    // Close menu when clicking a link (for mobile)
+    const menuLinks = menu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (window.innerWidth < 768) {
+                e.preventDefault();
                 hideMenu();
+                setTimeout(() => {
+                    window.location.href = link.href;
+                }, 300); // Delay to allow the menu to close smoothly
             }
         });
-    
-        // Hide menu on initial load for mobile
-        if (window.innerWidth < 768) {
+    });
+
+    // Ensure correct display when resizing window
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            menu.classList.remove('show');
+            document.body.classList.remove('overflow-hidden');
+        } else {
             hideMenu();
         }
-    </script>
+    });
+
+    // Hide menu on initial load for mobile
+    if (window.innerWidth < 768) {
+        hideMenu();
+    }
+</script>
 </body>
 </html>
