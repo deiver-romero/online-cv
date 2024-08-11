@@ -55,7 +55,7 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background-color: rgba(31, 41, 55, 0.95);
+                background-color: rgba(31, 41, 55, 0.98);
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -67,17 +67,26 @@
                 align-items: center;
             }
             #menu li {
-                margin: 1rem 0;
+                margin: 1.5rem 0;
             }
-            #closeMenu {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                font-size: 1.5rem;
-                color: white;
-                cursor: pointer;
-            }
+#closeMenu {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
         }
+        @media (max-width: 767px) {
+    #menu ul li a {
+        font-size: 1.5rem;
+        padding: 0.5rem 0;
+    }
+}
+
     </style>
 </head>
 <body class="bg-gray-900 text-gray-300">
