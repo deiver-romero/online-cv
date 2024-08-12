@@ -138,14 +138,14 @@
             </a>
         </div>
 
-        <section id="about" class="mb-16">
+        <section id="about" class="mb-12 md:mb-16">
             <h2 class="text-2xl font-bold mb-6 section-title text-white">About Me</h2>
             <div class="bg-gray-800 p-6 rounded-lg shadow-md">
                 <p class="mb-4">With over 10 years of experience in full stack development, I specialize in creating scalable, high-performance web applications and RESTful APIs. My passion for clean code, performance optimization, and problem-solving drives me to deliver innovative solutions that meet and exceed client expectations.</p>
             </div>
         </section>
 
-        <section id="skills" class="mb-16">
+        <section id="skills" class="mb-12 md:mb-16">
             <h2 class="text-2xl font-bold mb-6 section-title text-white">Technical Skills</h2>
             <div class="bg-gray-800 p-6 rounded-lg shadow-md mb-6">
                 <h3 class="text-xl font-semibold mb-2 text-white">Languages</h3>
@@ -185,7 +185,7 @@
             </div>
         </section>
 
-        <section id="experience" class="mb-16">
+        <section id="experience" class="mb-12 md:mb-16">
             <h2 class="text-2xl font-bold mb-6 section-title text-white">Professional Experience</h2>
             <div class="bg-gray-800 p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold mb-2 text-white">Senior Full Stack Developer</h3>
@@ -251,7 +251,7 @@
             </div>
         </section>
 
-        <section id="education" class="mb-16">
+        <section id="education" class="mb-12 md:mb-16">
             <h2 class="text-2xl font-bold mb-6 section-title text-white">Education</h2>
             <div class="bg-gray-800 p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold mb-2 text-white">Diploma in System Programming</h3>
@@ -266,7 +266,7 @@
             </div>
         </section>
 
-        <section id="interests" class="mb-16">
+        <section id="interests" class="mb-12 md:mb-16">
             <h2 class="text-2xl font-bold mb-6 section-title text-white">Interests</h2>
             <div class="bg-gray-800 p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold mb-2 text-white">Professional Interests</h3>
@@ -291,7 +291,7 @@
             </div>
         </section>
 
-        <section id="contact" class="mb-16">
+        <section id="contact" class="mb-12 md:mb-16">
             <h2 class="text-2xl font-bold mb-6 section-title text-white">Contact</h2>
             <div class="bg-gray-800 p-6 rounded-lg shadow-md">
                 <p class="mb-4">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out to me:</p>
@@ -312,6 +312,7 @@
     const menuToggle = document.getElementById('menuToggle');
     const menu = document.getElementById('menu');
     const closeMenu = document.getElementById('closeMenu');
+    const headerHeight = document.querySelector('header').offsetHeight + 20;
 
     function hideMenu() {
         menu.classList.remove('show');
@@ -323,6 +324,18 @@
         document.body.classList.add('overflow-hidden');
     }
 
+    function scrollToSection(event) {
+        event.preventDefault();
+        const targetId = event.currentTarget.getAttribute("href").substring(1);
+        const targetPosition = document.getElementById(targetId).offsetTop - headerHeight;
+        
+        window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth"
+        });
+        hideMenu();
+    }
+
     menuToggle.addEventListener('click', showMenu);
     closeMenu.addEventListener('click', hideMenu);
 
@@ -331,11 +344,16 @@
     menuLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             if (window.innerWidth < 768) {
+                scrollToSection(e);
+            } else {
                 e.preventDefault();
-                hideMenu();
-                setTimeout(() => {
-                    window.location.href = link.href;
-                }, 300); // Delay to allow the menu to close smoothly
+                const targetId = link.getAttribute("href").substring(1);
+                const targetPosition = document.getElementById(targetId).offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth"
+                });
             }
         });
     });
