@@ -1,0 +1,42 @@
+User-agent: *
+Disallow: /
+
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /logs/
+Disallow: /scripts/
+Disallow: /data/
+Disallow: /config/
+Disallow: /backup/
+
+# Block specific file types
+Disallow: /*.php$
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.xml$
+Disallow: /*.json$
+Disallow: /*?*
+
+# Set a crawl delay to reduce server load
+Crawl-delay: 3600
