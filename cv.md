@@ -19,7 +19,7 @@ Senior Full Stack Developer with over 10 years of expertise in .NET, C#, and mod
 - **Databases:** MS SQL, MySQL, MongoDB, Redis
 - **ORM:** Dapper, Entity Framework
 - **Web Technologies:** HTML5, CSS3, RESTful APIs
-- **DevOps:** Git, CI/CD pipelines, Docker, Cloud Services (Google Cloud, Cloudflare, Azure))
+- **DevOps:** Git, CI/CD pipelines, Docker, Cloud Services (Google Cloud, Cloudflare, Azure)
 
 ## Professional Experience
 ### Senior Full Stack Developer
